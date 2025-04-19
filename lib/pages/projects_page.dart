@@ -77,6 +77,7 @@ class ProjectsPage extends StatelessWidget {
           'assets/images/portfolio 3.png',
           'assets/images/portfolio 4.png',
           'assets/images/portfolio 5.png',
+          'assets/images/portfolio 6.png',
           'assets/images/portfolio app 1.png',
           'assets/images/portfolio app 2.png',
           'assets/images/portfolio app 3.png',
