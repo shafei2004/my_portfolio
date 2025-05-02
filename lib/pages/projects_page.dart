@@ -69,6 +69,46 @@ class ProjectsPage extends StatelessWidget {
   Widget _buildProjectList(BuildContext context) {
     List<Project> projects = [
       Project(
+        title: "مُؤْنِس",
+        description: 'مُؤْنِس – رفيقك الإسلامي اليومي (يعمل بدون إنترنت)',
+        mainImagePath: 'assets/images/Munis 1.jpg',
+        additionalImagePaths: [
+          'assets/images/Munis 1.jpg',
+          'assets/images/Munis 2.jpg',
+          'assets/images/Munis 3.jpg',
+          'assets/images/Munis 4.jpg',
+          'assets/images/Munis 5.jpg',
+          'assets/images/Munis 6.jpg',
+          'assets/images/Munis 7.jpg',
+          'assets/images/Munis 8.jpg',
+          'assets/images/Munis 9.jpg',
+          'assets/images/Munis 10.jpg',
+          'assets/images/Munis 11.jpg',
+          'assets/images/Munis 12.jpg',
+          'assets/images/Munis 13.jpg',
+          'assets/images/Munis 14.jpg',
+          'assets/images/Munis 15.jpg',
+          'assets/images/Munis 16.jpg',
+          'assets/images/Munis 17.jpg',
+          'assets/images/Munis 18.jpg',
+          'assets/images/Munis 19.jpg',
+        ],
+        longDescription:
+            """مُؤْنِس هو تطبيق إسلامي شامل مصمم ليكون رفيقك اليومي في العبادة والذكر، بواجهة أنيقة وسهلة الاستخدام، ويعمل بشكل كامل دون الحاجة للاتصال بالإنترنت.
+📱 مُؤْنِس مصمم ليجمع بين البساطة والاحترافية، مع التركيز على تجربة المستخدم، وهدفه الأساسي هو أن يكون معينًا لك على الطاعة في كل وقت ومكان.""",
+        features: [
+          "القرآن الكريم كمصحف: تصفح صفحات القرآن بتقسيم المصحف الورقي، مع إمكانية البحث ووضع العلامة.",
+          'تلاوة صوتية: استمع لتلاوة كاملة بصوت الشيخ محمد صديق المنشاوي بجودة عالية.'
+              "ورد القرآن: خطط لختم القرآن حسب الوقت المناسب لك (15 - 604 يوم) وتابع تقدمك يومًا بيوم.",
+          "الأذكار والأدعية: مجموعة من أهم الأذكار اليومية والأدعية المصنفة.",
+          "سبحة إلكترونية: تصميم بسيط وأنيق للتسبيح في أي وقت.",
+          'الوضع الليلي والنهاري: راحة لعينيك في كل الأوقات.',
+        ],
+        technologiesUsed:
+            "Flutter, Dart, sqflite , path_provider , shared_preferences, flutter_localizations, responsive_builder, audioplayers",
+        githubLink: "https://github.com/shafei2004/Islamic_app",
+      ),
+      Project(
         title: "My Portfolio",
         description: "This portfolio website built using Flutter.",
         mainImagePath: 'assets/images/portfolio 1.png',
@@ -92,7 +132,7 @@ class ProjectsPage extends StatelessWidget {
           "Animated transitions between pages",
           "Project showcase with details"
         ],
-        technologiesUsed: "Flutter, Dart, Animate_Do",
+        technologiesUsed: "Flutter, Dart, Animate_Do, url_launcher",
         githubLink: "https://github.com/shafei2004/my_portfolio.git",
       ),
       Project(
@@ -103,7 +143,8 @@ class ProjectsPage extends StatelessWidget {
           'assets/images/bookly 2.png',
           'assets/images/bookly 3.png',
         ],
-        longDescription: "A responsive book search app built with Flutter and Dart.",
+        longDescription:
+            "A responsive book search app built with Flutter and Dart.",
         features: [
           "Book search with filters",
           "Shopping cart system",
