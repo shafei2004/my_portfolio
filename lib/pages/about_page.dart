@@ -296,22 +296,52 @@ As I continue to grow in Flutter and mobile development, I’m preparing to expl
                 ),
               ),
               const SizedBox(height: 20),
-              _buildExperienceItem(
-                title: 'Education',
-                description:
-                    '''- Faculty of computer and information , Minia University
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                _buildExperienceItem(
+                  title: 'Education',
+                  description:
+                      '''- Faculty of computer and information , Minia University
 - Department of computer science''',
-              ),
-              _buildExperienceItem(
-                title: "Mobile app Developer",
-                description:
-                    '''- Built and maintained multiple mobile and web applications using Flutter, implementing modern design patterns and clean code practices.
+                ),
+                _buildExperienceItem(
+                  title: 'Courses & Training ',
+                  description: '''- Flutter & Dart Complete Development 
+- State Management (MVVM) 
+- Clean Architecture for Scalable Applications ''',
+                ),
+                _buildExperienceItem(
+                  title: "Mobile app Developer",
+                  description:
+                      '''- Built and maintained multiple mobile and web applications using Flutter, implementing modern design patterns and clean code practices.
 - Collaborated with cross-functional teams to deliver high-quality solutions.
 - Implemented state management solutions, including Provider and BLoC.
 - Conducted code reviews and provided constructive feedback to fellow developers.
 - Developed and implemented UI/UX design solutions for mobile and web applications.
 - Utilized Firebase for backend services and data management.''',
-              ),
+                ),
+              ])
+//               _buildExperienceItem(
+//                 title: 'Education',
+//                 description:
+//                     '''- Faculty of computer and information , Minia University
+// - Department of computer science''',
+//               ),
+//               _buildExperienceItem(
+//                 title: 'Courses & Training ',
+//                 description: '''- Flutter & Dart Complete Development
+// - State Management (MVVM)
+// - Clean Architecture for Scalable Applications ''',
+//               ),
+//               _buildExperienceItem(
+//                 title: "Mobile app Developer",
+//                 description:
+//                     '''- Built and maintained multiple mobile and web applications using Flutter, implementing modern design patterns and clean code practices.
+// - Collaborated with cross-functional teams to deliver high-quality solutions.
+// - Implemented state management solutions, including Provider and BLoC.
+// - Conducted code reviews and provided constructive feedback to fellow developers.
+// - Developed and implemented UI/UX design solutions for mobile and web applications.
+// - Utilized Firebase for backend services and data management.''',
+//               ),
               // const SizedBox(height: 30),
               // FadeInUp(
               //   delay: const Duration(milliseconds: 1400),
@@ -368,12 +398,14 @@ As I continue to grow in Flutter and mobile development, I’m preparing to expl
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              title,
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-                color: Colors.white,
+            Center(
+              child: Text(
+                title,
+                style: GoogleFonts.poppins(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                ),
               ),
             ),
             Padding(

@@ -69,6 +69,36 @@ class ProjectsPage extends StatelessWidget {
   Widget _buildProjectList(BuildContext context) {
     List<Project> projects = [
       Project(
+        title: "restaurant app",
+        description:
+            "A modern restaurant app that allows users to browse menus, add items to cart, manage favorites, and place orders seamlessly.",
+        mainImagePath: 'assets/images/yamwich 1.png',
+        additionalImagePaths: [
+          'assets/images/yamwich 2.png',
+          'assets/images/yamwich 3.png',
+          'assets/images/yamwich 4.png',
+          'assets/images/yamwich 5.png',
+          'assets/images/yamwich 6.png',
+          'assets/images/yamwich 7.png',
+          'assets/images/yamwich 8.png',
+          'assets/images/yamwich 9.png',
+        ],
+        longDescription:
+            "A mobile application that allows users to explore food items, add favorites, and manage orders with a simple cart system. The project was mainly focused on practicing Firebase integration, API handling, local storage, state management (Cubit/Bloc), and Clean Architecture. It was a valuable experience to apply these concepts in building a functional and user-friendly app.",
+        features: [
+          "Start Page (splash page)",
+          "User authentication (register, login, profile management)",
+          "Home page (the main menu)",
+          "Adding, editing, and removing items from the cart",
+          "Favorites system to save and manage preferred dishes",
+          "Profile editing with the ability to upload/change profile images",
+          "Responsive UI with a clean and modern design",
+        ],
+        technologiesUsed:
+            "Flutter, Dart, Firebase Authentication & Firestore, Dio, Bloc/Cubit, GetIt (Dependency Injection)",
+        githubLink: "https://github.com/shafei2004/restaurant_app",
+      ),
+      Project(
         title: "مُؤْنِس",
         description: 'مُؤْنِس – رفيقك الإسلامي اليومي (يعمل بدون إنترنت)',
         mainImagePath: 'assets/images/Munis 1.jpg',
