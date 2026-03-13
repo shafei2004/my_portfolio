@@ -20,17 +20,18 @@ class SocialLinksRow extends StatelessWidget {
       children: links.map((link) {
         final href = link['href']?.toString();
         final name = (link['name'] ?? '').toString().toLowerCase();
-        IconData iconData = FontAwesomeIcons.question;
-        if (name.contains('linkedin'))
+        FaIconData iconData = FontAwesomeIcons.question;
+        if (name.contains('linkedin')) {
           iconData = FontAwesomeIcons.linkedin;
-        else if (name.contains('github'))
+        } else if (name.contains('github')) {
           iconData = FontAwesomeIcons.github;
-        else if (name.contains('whatsapp'))
+        } else if (name.contains('whatsapp')) {
           iconData = FontAwesomeIcons.whatsapp;
+        }
 
         return IconButton(
           onPressed: () => controller.launchURL(href),
-          icon: Icon(iconData, size: 30, color: theme.colorScheme.primary),
+          icon: FaIcon(iconData, size: 30, color: theme.colorScheme.primary),
         );
       }).toList(),
     );
