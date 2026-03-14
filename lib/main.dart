@@ -7,8 +7,8 @@ import 'package:provider/provider.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Supabase.initialize(
-    url: 'https://cazydzpculbiotpzxofq.supabase.co',
-    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNhenlkenBjdWxiaW90cHp4b2ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjAzNDU0MjAsImV4cCI6MjA3NTkyMTQyMH0.YpP9S3NdS_3Wdpu5zlfh531Zwe9tSPVowiN-bdilZJQ',
+    url: 'https://icutvdqrfgmpmxmxvahy.supabase.co',
+    anonKey: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImljdXR2ZHFyZmdtcG14bXh2YWh5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM0Mzg2NTYsImV4cCI6MjA4OTAxNDY1Nn0.brGuminegEcttbWvzIsP2TVXujzrdnFv0OkXwgKXHfE',
   );
   runApp(
     ChangeNotifierProvider(
