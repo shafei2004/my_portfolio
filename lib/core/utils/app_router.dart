@@ -17,18 +17,12 @@ abstract class AppRouter {
   static final router = GoRouter(
     routes: [
       GoRoute(path: kInitialRoute, builder: (context, state) => const TopBar()),
-      GoRoute(path: kHomePage, builder: (context, state) => const HomePage()),
-      GoRoute(path: kAboutPage, builder: (context, state) => const AboutPage()),
-      GoRoute(path: kProjectsPage, builder: (context, state) => ProjectsPage()),
       GoRoute(
-  path: kProjectsDetailsPage,
-  builder: (context, state) => ProjectDetailPage(
-    projectId: state.uri.queryParameters['slug'] ?? '',
-  ),
-),
-      GoRoute(
-          path: kContactsPage,
-          builder: (context, state) => const ContactPage()),
+        path: kProjectsDetailsPage,
+        builder: (context, state) => ProjectDetailPage(
+          projectId: state.uri.queryParameters['slug'] ?? '',
+        ),
+      ),
     ],
   );
 }

@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:animate_do/animate_do.dart';
@@ -88,83 +90,129 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
     final p = project!;
 
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        automaticallyImplyLeading: false,
-        title: FadeInDown(
-          child: Text(
-            p.title,
-            style: GoogleFonts.poppins(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: theme.textTheme.bodyMedium?.color,
-            ),
-          ),
-        ),
-        actions: [
-          IconButton(
-            icon: Icon(
-              isDarkMode ? Icons.dark_mode : Icons.light_mode,
-              color: isDarkMode ? Colors.white : Colors.black87,
-              size: 22,
-            ),
-            onPressed: () => themeProvider.toggleTheme(),
-          ),
-          const SizedBox(width: 8),
-        ],
-      ),
+      backgroundColor: theme.colorScheme.background,
       body: Stack(
         children: [
-          // RefreshIndicator(
-          //   onRefresh: _loadProject,
-          //   child:
-          SingleChildScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FadeInDown(
-                  duration: const Duration(milliseconds: 600),
-                  child: ProjectDetailsHeader(
-                    category: p.category,
-                    title: p.title,
-                    description: p.description,
+          CustomScrollView(
+            physics: const BouncingScrollPhysics(),
+            slivers: [
+              // 🔝 Premium App Bar
+              SliverAppBar(
+                expandedHeight: 0,
+                floating: true,
+                pinned: true,
+                elevation: 0,
+                backgroundColor: theme.colorScheme.surface.withOpacity(0.8),
+                flexibleSpace: ClipRRect(
+                  child: BackdropFilter(
+                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                    child: Container(color: Colors.transparent),
                   ),
                 ),
-                const SizedBox(height: 20),
-                FadeInUp(
-                  duration: const Duration(milliseconds: 700),
-                  child: ProjectImageSlider(images: p.images),
+                title: FadeInDown(
+                  duration: const Duration(milliseconds: 500),
+                  child: Text(
+                    p.title,
+                    style: GoogleFonts.cairo(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: theme.colorScheme.onSurface,
+                    ),
+                  ),
                 ),
-                const SizedBox(height: 30),
-                FadeInUp(
-                  duration: const Duration(milliseconds: 800),
-                  child:
-                      ProjectAboutSection(longDescription: p.longDescription),
+                leading: IconButton(
+                  icon: const Icon(Icons.arrow_back_ios_new_rounded, size: 20),
+                  onPressed: () => Navigator.of(context).pop(),
+                  color: theme.colorScheme.onSurface,
                 ),
-                const SizedBox(height: 30),
-                FadeInUp(
-                  duration: const Duration(milliseconds: 900),
-                  child: ProjectFeaturesSection(features: p.features),
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                      color: isDarkMode ? theme.colorScheme.primary : theme.colorScheme.onSurface,
+                      size: 22,
+                    ),
+                    onPressed: () => themeProvider.toggleTheme(),
+                  ),
+                  const SizedBox(width: 8),
+                ],
+              ),
+
+              // 📄 Content
+              SliverToBoxAdapter(
+                child: LayoutBuilder(
+                  builder: (context, constraints) {
+                    final isDesktop = constraints.maxWidth > 900;
+                    final horizontalPadding = isDesktop ? constraints.maxWidth * 0.15 : 20.0;
+
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 32),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // 🏛️ Header section
+                          FadeInUp(
+                            duration: const Duration(milliseconds: 600),
+                            child: ProjectDetailsHeader(
+                              category: p.category,
+                              title: p.title,
+                              description: p.description,
+                            ),
+                          ),
+                          
+                          const SizedBox(height: 48),
+
+                          // 🖼️ Image Gallery / Slider
+                          FadeInUp(
+                            duration: const Duration(milliseconds: 700),
+                            delay: const Duration(milliseconds: 200),
+                            child: ProjectImageSlider(images: p.images),
+                          ),
+
+                          const SizedBox(height: 64),
+
+                          // 📝 About Section
+                          FadeInUp(
+                            duration: const Duration(milliseconds: 800),
+                            delay: const Duration(milliseconds: 400),
+                            child: ProjectAboutSection(longDescription: p.longDescription),
+                          ),
+
+                          const SizedBox(height: 48),
+
+                          // ⚡ Features
+                          FadeInUp(
+                            duration: const Duration(milliseconds: 900),
+                            delay: const Duration(milliseconds: 600),
+                            child: ProjectFeaturesSection(features: p.features),
+                          ),
+
+                          const SizedBox(height: 48),
+
+                          // 🛠️ Technologies
+                          FadeInUp(
+                            duration: const Duration(milliseconds: 1000),
+                            delay: const Duration(milliseconds: 800),
+                            child: ProjectTechnologiesSection(technologies: p.technologies),
+                          ),
+
+                          const SizedBox(height: 100), // Space for FAB
+                        ],
+                      ),
+                    );
+                  },
                 ),
-                const SizedBox(height: 30),
-                FadeInUp(
-                  duration: const Duration(milliseconds: 1000),
-                  child:
-                      ProjectTechnologiesSection(technologies: p.technologies),
-                ),
-                const SizedBox(height: 16),
-              ],
-            ),
+              ),
+            ],
           ),
-          // ),
-          // GitHub floating button with animation
+
+          // 🏗️ Floating Action Button (GitHub)
           Positioned(
-            bottom: 20,
-            right: 20,
-            child: FadeInUp(
-              duration: const Duration(milliseconds: 1000),
+            bottom: 30,
+            right: 30,
+            child: FadeInRight(
+              duration: const Duration(milliseconds: 800),
+              delay: const Duration(milliseconds: 1200),
               child: GithubButton(githubUrl: p.githubUrl),
             ),
           ),

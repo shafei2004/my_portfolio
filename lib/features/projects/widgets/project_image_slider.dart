@@ -8,41 +8,34 @@ class ProjectImageSlider extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return SizedBox(
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: 480, // Increased height for vertical portraits
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: images.length,
-        separatorBuilder: (_, __) => const SizedBox(width: 12),
+        padding: const EdgeInsets.symmetric(vertical: 10),
+        separatorBuilder: (_, __) => const SizedBox(width: 20),
         itemBuilder: (_, i) {
           final url = images[i];
           return Container(
-            width: 280,
+            width: 280, // Standard width for phone screenshots
             decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(16),
-              gradient: LinearGradient(
-                colors: [
-                  theme.colorScheme.surface,
-                  theme.colorScheme.surfaceVariant.withOpacity(0.4),
-                ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-              ),
+              borderRadius: BorderRadius.circular(24),
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black.withOpacity(0.05),
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
+                  color: theme.colorScheme.primary.withOpacity(0.1),
+                  blurRadius: 20,
+                  offset: const Offset(0, 10),
                 ),
               ],
             ),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(16),
+              borderRadius: BorderRadius.circular(24),
               child: Image.network(
                 url,
                 fit: BoxFit.cover,
                 errorBuilder: (_, __, ___) => Container(
                   color: theme.colorScheme.surfaceVariant,
-                  child: const Center(child: Icon(Icons.broken_image)),
+                  child: const Center(child: Icon(Icons.broken_image, size: 40)),
                 ),
               ),
             ),
@@ -50,5 +43,6 @@ class ProjectImageSlider extends StatelessWidget {
         },
       ),
     );
+
   }
 }

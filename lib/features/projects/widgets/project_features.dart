@@ -13,6 +13,8 @@ class ProjectFeatures extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    final colorScheme = theme.colorScheme;
     const maxVisible = 3;
     final visible = features.take(maxVisible).toList();
     final remaining = features.length - visible.length;
@@ -31,12 +33,12 @@ class ProjectFeatures extends StatelessWidget {
                   f,
                   style: GoogleFonts.poppins(
                     fontSize: 12,
-                    color: isDark ? Colors.white : Colors.teal[800],
-                    fontWeight: FontWeight.w500,
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.w600,
                   ),
                 ),
-                backgroundColor:
-                    isDark ? Colors.teal.shade700 : Colors.teal.shade100,
+                backgroundColor: colorScheme.primary.withOpacity(0.1),
+                side: BorderSide(color: colorScheme.primary.withOpacity(0.2)),
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
                 visualDensity:
                     const VisualDensity(horizontal: -2, vertical: -2),
@@ -49,12 +51,12 @@ class ProjectFeatures extends StatelessWidget {
                   "+$remaining more",
                   style: GoogleFonts.poppins(
                     fontSize: 12,
-                    color: isDark ? Colors.white70 : Colors.teal[800],
+                    color: colorScheme.onSurface.withOpacity(0.5),
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                backgroundColor:
-                    isDark ? Colors.teal.shade900 : Colors.teal.shade50,
+                backgroundColor: colorScheme.onSurface.withOpacity(0.05),
+                side: BorderSide(color: colorScheme.onSurface.withOpacity(0.1)),
                 padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 0),
                 visualDensity:
                     const VisualDensity(horizontal: -2, vertical: -2),

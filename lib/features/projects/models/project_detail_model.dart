@@ -20,30 +20,44 @@ class ProjectDetailModel {
   });
 
   factory ProjectDetailModel.fromMap(Map<String, dynamic> data) {
-    final images = (data['project_images'] as List<dynamic>?)
-            ?.map((e) => e['image_url']?.toString())
-            .whereType<String>()
-            .toList() ??
-        [];
+    // 🛡️ Safe Image Parsing
+    final rawImages = data['project_images'];
+    List<String> images = [];
+    
+    if (rawImages is List) {
+      images = rawImages
+          .map((e) => e is Map ? e['image_url']?.toString() : e.toString())
+          .whereType<String>()
+          .toList();
+    }
 
-    if (images.isEmpty &&
-        (data['cover_url'] as String?)?.isNotEmpty == true) {
+    if (images.isEmpty && (data['cover_url'] as String?)?.isNotEmpty == true) {
       images.add(data['cover_url'] as String);
     }
 
+    // 🛡️ Safe Features & Technologies (Tools) Parsing
+    final rawFeatures = data['features'];
+    final rawTools = data['tools'];
+    
+    List<String> featureList = [];
+    if (rawFeatures is List) {
+      featureList = rawFeatures.map((e) => e.toString()).toList();
+    }
+
+    List<String> techList = [];
+    if (rawTools is List) {
+      techList = rawTools.map((e) => e.toString()).toList();
+    }
+
     return ProjectDetailModel(
-      title: data['title'] ?? '',
-      category: data['category'] ?? '',
-      description: (data['short_description'] ?? data['description']) ?? '',
-      longDescription: data['long_description'] ?? '',
+      title: data['title']?.toString() ?? '',
+      category: data['category']?.toString() ?? '',
+      description: (data['short_description'] ?? data['description'])?.toString() ?? '',
+      longDescription: (data['long_description'] ?? data['description'])?.toString() ?? '',
       images: images,
-      features: (data['features'] is List)
-          ? List<String>.from(data['features'])
-          : [],
-      technologies: (data['tools'] is List)
-          ? List<String>.from(data['tools'])
-          : [],
-      githubUrl: data['github_url'] ?? data['repo_url'] ?? '',
+      features: featureList,
+      technologies: techList,
+      githubUrl: (data['github_url'] ?? data['repo_url'])?.toString() ?? '',
     );
   }
 }

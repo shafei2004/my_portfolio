@@ -18,8 +18,6 @@ class ProjectImage extends StatelessWidget {
       child: imageUrl.isNotEmpty
           ? Image.network(
               imageUrl,
-              height: double.infinity,
-              width: 90,
               fit: BoxFit.cover,
               errorBuilder: (_, __, ___) => _buildFallback(theme),
             )
@@ -28,8 +26,6 @@ class ProjectImage extends StatelessWidget {
   }
 
   Widget _buildFallback(ThemeData theme) => Container(
-        height: double.infinity,
-        width: 90,
         color: isDark ? Colors.grey[900] : Colors.grey[200],
         child: Icon(
           Icons.broken_image,

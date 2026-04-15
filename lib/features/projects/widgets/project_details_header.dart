@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ProjectDetailsHeader extends StatelessWidget {
   final String category;
@@ -19,25 +20,43 @@ class ProjectDetailsHeader extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         if (category.isNotEmpty)
-          Text(
-            category,
-            style: TextStyle(
-              color: theme.colorScheme.primary,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 1,
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+            decoration: BoxDecoration(
+              color: theme.colorScheme.primary.withOpacity(0.1),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              category.toUpperCase(),
+              style: GoogleFonts.cairo(
+                color: theme.colorScheme.primary,
+                fontWeight: FontWeight.bold,
+                fontSize: 12,
+                letterSpacing: 1.2,
+              ),
             ),
           ),
-        const SizedBox(height: 8),
-        Text(title,
-            style: theme.textTheme.headlineMedium
-                ?.copyWith(fontWeight: FontWeight.bold)),
-        const SizedBox(height: 8),
+        const SizedBox(height: 16),
+        Text(
+          title,
+          style: GoogleFonts.cairo(
+            fontSize: 32,
+            fontWeight: FontWeight.w900,
+            color: theme.colorScheme.onSurface,
+            height: 1.2,
+          ),
+        ),
+        const SizedBox(height: 12),
         Text(
           description,
-          style: theme.textTheme.bodyMedium
-              ?.copyWith(color: theme.colorScheme.onSurface.withOpacity(0.7)),
+          style: GoogleFonts.cairo(
+            fontSize: 16,
+            height: 1.6,
+            color: theme.colorScheme.onSurface.withOpacity(0.7),
+          ),
         ),
       ],
     );
+
   }
 }
