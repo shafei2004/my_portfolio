@@ -25,6 +25,7 @@ class _BuildCardState extends State<BuildCard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final colorScheme = theme.colorScheme;
+    final isMobile = MediaQuery.of(context).size.width < 600;
 
     return MouseRegion(
       onEnter: (_) => setState(() => _isHovered = true),
@@ -56,38 +57,27 @@ class _BuildCardState extends State<BuildCard> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Text(
-                      widget.title,
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 20,
-                        color: _isHovered ? colorScheme.primary : null,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 12),
-                  AnimatedContainer(
-                    duration: const Duration(milliseconds: 300),
-                    padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-                    decoration: BoxDecoration(
-                      color: _isHovered ? colorScheme.primary : colorScheme.primary.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Text(
-                      widget.year,
-                      style: theme.textTheme.labelMedium?.copyWith(
-                        color: _isHovered ? Colors.black : colorScheme.primary,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+              // Header Row/Column (Responsive)
+              if (isMobile)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    _buildTitle(theme, colorScheme),
+                    const SizedBox(height: 12),
+                    _buildYearBadge(colorScheme),
+                  ],
+                )
+              else
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Expanded(child: _buildTitle(theme, colorScheme)),
+                    const SizedBox(width: 12),
+                    _buildYearBadge(colorScheme),
+                  ],
+                ),
+
               const SizedBox(height: 12),
               Text(
                 widget.subtitle,
@@ -106,6 +96,36 @@ class _BuildCardState extends State<BuildCard> {
               ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildTitle(ThemeData theme, ColorScheme colorScheme) {
+    return Text(
+      widget.title,
+      style: theme.textTheme.titleLarge?.copyWith(
+        fontWeight: FontWeight.bold,
+        fontSize: 20,
+        color: _isHovered ? colorScheme.primary : null,
+      ),
+    );
+  }
+
+  Widget _buildYearBadge(ColorScheme colorScheme) {
+    return AnimatedContainer(
+      duration: const Duration(milliseconds: 300),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+      decoration: BoxDecoration(
+        color: _isHovered ? colorScheme.primary : colorScheme.primary.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(10),
+      ),
+      child: Text(
+        widget.year,
+        style: TextStyle(
+          color: _isHovered ? Colors.black : colorScheme.primary,
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
         ),
       ),
     );
