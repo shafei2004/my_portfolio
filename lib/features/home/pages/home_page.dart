@@ -1,12 +1,10 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_portfolio/core/utils/navigation_provider.dart';
 import 'package:my_portfolio/core/widgets/visibility_animator.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
-import 'package:my_portfolio/core/utils/app_router.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
 
 class HomePage extends StatefulWidget {
@@ -58,9 +56,6 @@ class _HomePageState extends State<HomePage> {
     final colorScheme = theme.colorScheme;
 
     final heroUrl = _homeData?['hero_image_url'] as String?;
-    final name = _homeData?['name'] as String? ?? 'Mohamed El-Shafei';
-    final role = _homeData?['role'] as String? ?? 'Flutter Developer | Mobile & Web';
-    final shortBio = _homeData?['short_bio'] as String? ?? 'Software engineer with a passion for Mobile App development using Flutter.';
 
     if (_loading) {
       return const Scaffold(

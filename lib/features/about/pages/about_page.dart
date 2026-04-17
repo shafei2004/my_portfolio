@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:my_portfolio/core/widgets/visibility_animator.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:my_portfolio/features/about/widgets/build_card.dart';
-import 'package:my_portfolio/features/about/widgets/online_courses.dart';
 import 'package:my_portfolio/features/about/widgets/section_title.dart';
 import 'package:my_portfolio/features/about/widgets/skill_card.dart';
 
