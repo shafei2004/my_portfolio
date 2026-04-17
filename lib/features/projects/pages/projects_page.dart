@@ -60,7 +60,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
             // 🔹 Header
             ScrollAppearance(
               delay: const Duration(milliseconds: 200),
-              offset: const Offset(-0.2, 0),
+              offset: const Offset(-0.05, 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [

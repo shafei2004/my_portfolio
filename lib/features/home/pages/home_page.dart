@@ -118,7 +118,7 @@ class _HomePageState extends State<HomePage> {
 
     return ScrollAppearance(
       delay: const Duration(milliseconds: 300),
-      offset: const Offset(0, -0.2), // Slide down
+      offset: const Offset(0, -0.05), // Slide down
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -179,7 +179,7 @@ class _HomePageState extends State<HomePage> {
         // 👑 Name
         ScrollAppearance(
           delay: const Duration(milliseconds: 200),
-          offset: const Offset(-0.2, 0), // Slide from left
+          offset: const Offset(-0.05, 0), // Slide from left
           child: Text(
             name,
             textAlign: isDesktop ? TextAlign.left : TextAlign.center,
@@ -239,7 +239,7 @@ class _HomePageState extends State<HomePage> {
         // 🚀 Actions
         ScrollAppearance(
           delay: const Duration(milliseconds: 800),
-          offset: const Offset(0, 0.2), // Slide up
+          offset: const Offset(0, 0.05), // Slide up
           child: Wrap(
             alignment: isDesktop ? WrapAlignment.start : WrapAlignment.center,
             spacing: 20,

@@ -155,7 +155,7 @@ class _AboutPageState extends State<AboutPage> {
               // 🔹 About Me Header
               ScrollAppearance(
                 delay: const Duration(milliseconds: 200),
-                offset: const Offset(-0.2, 0),
+                offset: const Offset(-0.05, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -254,7 +254,7 @@ class _AboutPageState extends State<AboutPage> {
   Widget _buildSectionTitle(IconData icon, String title) {
     return ScrollAppearance(
       delay: const Duration(milliseconds: 100),
-      offset: const Offset(0, 0.2),
+      offset: const Offset(0, 0.05),
       child: SectionTitle(icon: icon, title: title),
     );
   }
@@ -362,7 +362,7 @@ class _AboutPageState extends State<AboutPage> {
               padding: const EdgeInsets.only(bottom: 40),
               child: ScrollAppearance(
                 delay: Duration(milliseconds: 200 * index),
-                offset: const Offset(0, 0.2),
+                offset: const Offset(0, 0.05),
                 child: child,
               ),
             ),
@@ -399,7 +399,7 @@ class _AboutPageState extends State<AboutPage> {
         padding: const EdgeInsets.only(bottom: 24),
         child: ScrollAppearance(
           delay: Duration(milliseconds: 200 * entry.key),
-          offset: const Offset(0, 0.2),
+          offset: const Offset(0, 0.05),
           child: SkillCard(skill: {
             'name': entry.value['name'] ?? '',
             'icon': iconData,

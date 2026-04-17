@@ -90,7 +90,7 @@ class _ContactPageState extends State<ContactPage> {
               // 🔹 Header Section
               ScrollAppearance(
                 delay: const Duration(milliseconds: 200),
-                offset: const Offset(0, -0.2), // Slide down
+                offset: const Offset(0, -0.05), // Slide down
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -148,7 +148,7 @@ class _ContactPageState extends State<ContactPage> {
                               flex: 6,
                               child: ScrollAppearance(
                                 delay: const Duration(milliseconds: 600),
-                                offset: const Offset(0.2, 0), // Slide from right
+                                offset: const Offset(0.05, 0), // Slide from right
                                 child: ContactFormSection(
                                   formKey: _formKey,
                                   nameController: _nameController,
@@ -167,7 +167,7 @@ class _ContactPageState extends State<ContactPage> {
                             const SizedBox(height: 48),
                             ScrollAppearance(
                               delay: const Duration(milliseconds: 400),
-                              offset: const Offset(0, 0.2),
+                              offset: const Offset(0, 0.05),
                               child: ContactFormSection(
                                 formKey: _formKey,
                                 nameController: _nameController,
