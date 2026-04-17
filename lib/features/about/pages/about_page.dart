@@ -1,6 +1,6 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
-import 'package:my_portfolio/core/widgets/visibility_animator.dart';
+import 'package:my_portfolio/core/widgets/scroll_appearance.dart';
+
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:my_portfolio/features/about/widgets/build_card.dart';
 import 'package:my_portfolio/features/about/widgets/section_title.dart';
@@ -147,16 +147,15 @@ class _AboutPageState extends State<AboutPage> {
         final isDesktop = constraints.maxWidth > 1000;
         final horizontalPadding = isDesktop ? constraints.maxWidth * 0.1 : 24.0;
 
-        return VisibilityAnimator(
-          threshold: 0.15,
-          child: SingleChildScrollView(
-            padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 80),
-            child: Column(
+        return Padding(
+          padding: EdgeInsets.symmetric(horizontal: horizontalPadding, vertical: 80),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // 🔹 About Me Header
-              FadeInLeft(
-                duration: const Duration(milliseconds: 800),
+              ScrollAppearance(
+                delay: const Duration(milliseconds: 200),
+                offset: const Offset(-0.2, 0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -188,6 +187,7 @@ class _AboutPageState extends State<AboutPage> {
                   ],
                 ),
               ),
+
 
               const SizedBox(height: 80),
 
@@ -245,18 +245,20 @@ class _AboutPageState extends State<AboutPage> {
                 Column(children: _buildSkillsList(skills)),
             ],
           ),
-          ),
         );
       },
     );
+
   }
 
   Widget _buildSectionTitle(IconData icon, String title) {
-    return FadeInUp(
-      duration: const Duration(milliseconds: 800),
+    return ScrollAppearance(
+      delay: const Duration(milliseconds: 100),
+      offset: const Offset(0, 0.2),
       child: SectionTitle(icon: icon, title: title),
     );
   }
+
 
   List<Widget> _buildEducationList(List<Map<String, dynamic>> data) {
     final list = data.isNotEmpty ? data : [
@@ -358,13 +360,14 @@ class _AboutPageState extends State<AboutPage> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(bottom: 40),
-              child: FadeInUp(
-                duration: const Duration(milliseconds: 800),
-                delay: Duration(milliseconds: 100 * index),
+              child: ScrollAppearance(
+                delay: Duration(milliseconds: 200 * index),
+                offset: const Offset(0, 0.2),
                 child: child,
               ),
             ),
           ),
+
         ],
       ),
     );
@@ -394,9 +397,9 @@ class _AboutPageState extends State<AboutPage> {
 
       return Padding(
         padding: const EdgeInsets.only(bottom: 24),
-        child: FadeInUp(
-          duration: const Duration(milliseconds: 800),
-          delay: Duration(milliseconds: 150 * entry.key),
+        child: ScrollAppearance(
+          delay: Duration(milliseconds: 200 * entry.key),
+          offset: const Offset(0, 0.2),
           child: SkillCard(skill: {
             'name': entry.value['name'] ?? '',
             'icon': iconData,
@@ -404,6 +407,7 @@ class _AboutPageState extends State<AboutPage> {
           }),
         ),
       );
+
     }).toList();
 
   }

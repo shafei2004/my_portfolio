@@ -1,11 +1,11 @@
-import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:my_portfolio/core/utils/navigation_provider.dart';
-import 'package:my_portfolio/core/widgets/visibility_animator.dart';
+import 'package:my_portfolio/core/widgets/scroll_appearance.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
+
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -67,60 +67,58 @@ class _HomePageState extends State<HomePage> {
       builder: (context, constraints) {
         bool isDesktop = constraints.maxWidth > 1000;
 
-        return VisibilityAnimator(
-          threshold: 0.1,
-          child: Container(
-            width: double.infinity,
-            constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
-            decoration: BoxDecoration(
-              gradient: RadialGradient(
-                center: isDesktop ? const Alignment(0.6, -0.3) : const Alignment(0.8, -0.6),
-                radius: 1.2,
-                colors: [
-                  colorScheme.primary.withOpacity(0.08),
-                  Colors.transparent,
-                ],
-              ),
+        return Container(
+          width: double.infinity,
+          constraints: BoxConstraints(minHeight: MediaQuery.of(context).size.height),
+          decoration: BoxDecoration(
+            gradient: RadialGradient(
+              center: isDesktop ? const Alignment(0.6, -0.3) : const Alignment(0.8, -0.6),
+              radius: 1.2,
+              colors: [
+                colorScheme.primary.withOpacity(0.08),
+                Colors.transparent,
+              ],
             ),
-            padding: EdgeInsets.symmetric(
-              horizontal: isDesktop ? constraints.maxWidth * 0.1 : 24,
-              vertical: isDesktop ? 100 : 120,
-            ),
-            child: isDesktop
-                ? Row(
-                    children: [
-                      Expanded(
-                        flex: 3,
-                        child: _buildInfoSection(context, isDesktop),
-                      ),
-                      const SizedBox(width: 40),
-                      Expanded(
-                        flex: 2,
-                        child: _buildProfileImage(heroUrl, colorScheme, isDesktop),
-                      ),
-                    ],
-                  )
-                : Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      _buildProfileImage(heroUrl, colorScheme, isDesktop),
-                      const SizedBox(height: 48),
-                      _buildInfoSection(context, isDesktop),
-                    ],
-                  ),
           ),
+          padding: EdgeInsets.symmetric(
+            horizontal: isDesktop ? constraints.maxWidth * 0.1 : 24,
+            vertical: isDesktop ? 100 : 120,
+          ),
+          child: isDesktop
+              ? Row(
+                  children: [
+                    Expanded(
+                      flex: 3,
+                      child: _buildInfoSection(context, isDesktop),
+                    ),
+                    const SizedBox(width: 40),
+                    Expanded(
+                      flex: 2,
+                      child: _buildProfileImage(heroUrl, colorScheme, isDesktop),
+                    ),
+                  ],
+                )
+              : Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    _buildProfileImage(heroUrl, colorScheme, isDesktop),
+                    const SizedBox(height: 48),
+                    _buildInfoSection(context, isDesktop),
+                  ],
+                ),
         );
-
       },
     );
+
   }
 
   Widget _buildProfileImage(String? heroUrl, ColorScheme colorScheme, bool isDesktop) {
     final double baseSize = isDesktop ? 380 : 260;
     final double radius = isDesktop ? 160 : 120;
 
-    return FadeInDown(
-      duration: const Duration(milliseconds: 1200),
+    return ScrollAppearance(
+      delay: const Duration(milliseconds: 300),
+      offset: const Offset(0, -0.2), // Slide down
       child: Stack(
         alignment: Alignment.center,
         children: [
@@ -164,6 +162,7 @@ class _HomePageState extends State<HomePage> {
         ],
       ),
     );
+
   }
 
   Widget _buildInfoSection(BuildContext context, bool isDesktop) {
@@ -178,8 +177,9 @@ class _HomePageState extends State<HomePage> {
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
         // 👑 Name
-        FadeInLeft(
-          duration: const Duration(milliseconds: 800),
+        ScrollAppearance(
+          delay: const Duration(milliseconds: 200),
+          offset: const Offset(-0.2, 0), // Slide from left
           child: Text(
             name,
             textAlign: isDesktop ? TextAlign.left : TextAlign.center,
@@ -193,9 +193,9 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(height: 12),
 
         // 💼 Role
-        FadeInLeft(
-          duration: const Duration(milliseconds: 800),
-          delay: const Duration(milliseconds: 200),
+        ScrollAppearance(
+          delay: const Duration(milliseconds: 400),
+          offset: const Offset(-0.2, 0),
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             decoration: BoxDecoration(
@@ -218,9 +218,9 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(height: 24),
 
         // 📖 Bio
-        FadeInLeft(
-          duration: const Duration(milliseconds: 800),
-          delay: const Duration(milliseconds: 400),
+        ScrollAppearance(
+          delay: const Duration(milliseconds: 600),
+          offset: const Offset(-0.2, 0),
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 700),
             child: Text(
@@ -237,9 +237,9 @@ class _HomePageState extends State<HomePage> {
         const SizedBox(height: 48),
 
         // 🚀 Actions
-        FadeInUp(
-          duration: const Duration(milliseconds: 800),
-          delay: const Duration(milliseconds: 600),
+        ScrollAppearance(
+          delay: const Duration(milliseconds: 800),
+          offset: const Offset(0, 0.2), // Slide up
           child: Wrap(
             alignment: isDesktop ? WrapAlignment.start : WrapAlignment.center,
             spacing: 20,
@@ -264,6 +264,7 @@ class _HomePageState extends State<HomePage> {
         ),
       ],
     );
+
 
   }
 

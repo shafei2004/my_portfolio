@@ -7,7 +7,6 @@ import 'package:my_portfolio/features/about/pages/about_page.dart';
 import 'package:my_portfolio/features/contacts/pages/contact_page.dart';
 import 'package:my_portfolio/features/home/pages/home_page.dart';
 import 'package:my_portfolio/features/projects/pages/projects_page.dart';
-import 'package:my_portfolio/core/widgets/custom_cursor.dart';
 import 'package:my_portfolio/core/widgets/footer_section.dart';
 import 'package:provider/provider.dart';
 
@@ -89,8 +88,7 @@ class _TopBarState extends State<TopBar> {
 
     return Scaffold(
       extendBody: true,
-      body: CustomCursor(
-        child: Stack(
+      body: Stack(
           children: [
           // 📊 Scroll Progress Bar (Top-most)
           Positioned(
@@ -197,7 +195,6 @@ class _TopBarState extends State<TopBar> {
             ),
           ),
         ],
-      ),
       ),
     );
   }
