@@ -5,6 +5,7 @@ import 'package:my_portfolio/core/widgets/scroll_appearance.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:my_portfolio/core/utils/constants.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -47,6 +48,33 @@ class _HomePageState extends State<HomePage> {
     } catch (e) {
       debugPrint('loadHome error: $e');
       setState(() => _loading = false);
+    }
+  }
+
+  Future<void> _downloadCV(String? url) async {
+    if (url == null || url.trim().isEmpty) {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("CV is not available right now."),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
+      return;
+    }
+    final uri = Uri.tryParse(url.trim());
+    if (uri != null && await canLaunchUrl(uri)) {
+      await launchUrl(uri, mode: LaunchMode.externalApplication);
+    } else {
+      if (mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Could not open CV link."),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      }
     }
   }
 
@@ -171,6 +199,7 @@ class _HomePageState extends State<HomePage> {
     final name = _homeData?['name'] as String? ?? 'Mohamed El-Shafei';
     final role = _homeData?['role'] as String? ?? 'Flutter Developer | Mobile & Web';
     final shortBio = _homeData?['short_bio'] as String? ?? 'Software engineer with a passion for Mobile App development using Flutter.';
+    final cvUrl = (_homeData?['CV_URL'] ?? _homeData?['cv_url']) as String?;
 
     return Column(
       crossAxisAlignment: isDesktop ? CrossAxisAlignment.start : CrossAxisAlignment.center,
@@ -254,10 +283,10 @@ class _HomePageState extends State<HomePage> {
               ),
               _buildActionButton(
                 context: context,
-                label: "Get In Touch",
-                icon: Icons.chat_bubble_rounded,
+                label: "Download CV",
+                icon: Icons.download_rounded,
                 isPrimary: false,
-                onPressed: () => Provider.of<NavigationProvider>(context, listen: false).scrollToSection(3),
+                onPressed: () => _downloadCV(cvUrl),
               ),
             ],
           ),

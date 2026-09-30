@@ -85,6 +85,8 @@ class _TopBarState extends State<TopBar> {
     final navProvider = Provider.of<NavigationProvider>(context);
     final isDarkMode = themeProvider.isDarkMode;
     final colorScheme = Theme.of(context).colorScheme;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final isMobile = screenWidth < 600;
 
     return Scaffold(
       extendBody: true,
@@ -137,56 +139,64 @@ class _TopBarState extends State<TopBar> {
             ),
           ),
           Positioned(
-            top: 20,
-            left: 20,
-            right: 20,
+            top: isMobile ? 12 : 20,
+            left: isMobile ? 8 : 20,
+            right: isMobile ? 8 : 20,
             child: SafeArea(
               child: Center(
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: BackdropFilter(
-                    filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-                      decoration: BoxDecoration(
-                        color: colorScheme.surface.withOpacity(0.7),
-                        borderRadius: BorderRadius.circular(30),
-                        border: Border.all(
-                          color: colorScheme.onSurface.withOpacity(0.1),
-                          width: 1,
+                child: FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(30),
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(
+                          horizontal: isMobile ? 12 : 20,
+                          vertical: isMobile ? 6 : 10,
                         ),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 20,
-                            offset: const Offset(0, 10),
-                          ),
-                        ],
-                      ),
-                      child: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          _buildNavItem("Home", Icons.home_rounded, 0, isDarkMode, navProvider),
-                          _buildNavItem("About", Icons.person_rounded, 1, isDarkMode, navProvider),
-                          _buildNavItem("Projects", Icons.work_rounded, 2, isDarkMode, navProvider),
-                          _buildNavItem("Contact", Icons.mail_rounded, 3, isDarkMode, navProvider),
-                          const SizedBox(width: 10),
-                          Container(
-                            height: 30,
-                            width: 1,
+                        decoration: BoxDecoration(
+                          color: colorScheme.surface.withOpacity(0.7),
+                          borderRadius: BorderRadius.circular(30),
+                          border: Border.all(
                             color: colorScheme.onSurface.withOpacity(0.1),
+                            width: 1,
                           ),
-                          const SizedBox(width: 10),
-                          IconButton(
-                            icon: Icon(
-                              isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
-                              color: isDarkMode ? colorScheme.primary : colorScheme.onSurface,
-                              size: 20,
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 20,
+                              offset: const Offset(0, 10),
                             ),
-                            onPressed: () => themeProvider.toggleTheme(),
-                            visualDensity: VisualDensity.compact,
-                          ),
-                        ],
+                          ],
+                        ),
+                        child: Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            _buildNavItem("Home", Icons.home_rounded, 0, isDarkMode, navProvider, isMobile),
+                            _buildNavItem("About", Icons.person_rounded, 1, isDarkMode, navProvider, isMobile),
+                            _buildNavItem("Projects", Icons.work_rounded, 2, isDarkMode, navProvider, isMobile),
+                            _buildNavItem("Contact", Icons.phone_in_talk_rounded, 3, isDarkMode, navProvider, isMobile),
+                            SizedBox(width: isMobile ? 6 : 10),
+                            Container(
+                              height: isMobile ? 24 : 30,
+                              width: 1,
+                              color: colorScheme.onSurface.withOpacity(0.1),
+                            ),
+                            SizedBox(width: isMobile ? 4 : 10),
+                            IconButton(
+                              icon: Icon(
+                                isDarkMode ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+                                color: isDarkMode ? colorScheme.primary : colorScheme.onSurface,
+                                size: isMobile ? 18 : 20,
+                              ),
+                              onPressed: () => themeProvider.toggleTheme(),
+                              visualDensity: VisualDensity.compact,
+                              padding: EdgeInsets.all(isMobile ? 4 : 8),
+                              constraints: const BoxConstraints(),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
@@ -199,7 +209,14 @@ class _TopBarState extends State<TopBar> {
     );
   }
 
-  Widget _buildNavItem(String label, IconData icon, int index, bool isDarkMode, NavigationProvider nav) {
+  Widget _buildNavItem(
+    String label,
+    IconData icon,
+    int index,
+    bool isDarkMode,
+    NavigationProvider nav,
+    bool isMobile,
+  ) {
     final isSelected = nav.selectedIndex == index;
     final colorScheme = Theme.of(context).colorScheme;
 
@@ -207,8 +224,11 @@ class _TopBarState extends State<TopBar> {
       onTap: () => nav.scrollToSection(index),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-        margin: const EdgeInsets.symmetric(horizontal: 4),
+        padding: EdgeInsets.symmetric(
+          horizontal: isMobile ? (isSelected ? 12 : 8) : 16,
+          vertical: isMobile ? 6 : 8,
+        ),
+        margin: EdgeInsets.symmetric(horizontal: isMobile ? 2 : 4),
         decoration: BoxDecoration(
           color: isSelected ? colorScheme.primary.withOpacity(0.1) : Colors.transparent,
           borderRadius: BorderRadius.circular(20),
@@ -217,15 +237,15 @@ class _TopBarState extends State<TopBar> {
           children: [
             Icon(
               icon,
-              size: 18,
+              size: isMobile ? 16 : 18,
               color: isSelected ? colorScheme.primary : colorScheme.onSurface.withOpacity(0.6),
             ),
             if (isSelected) ...[
-              const SizedBox(width: 8),
+              SizedBox(width: isMobile ? 6 : 8),
               Text(
                 label,
                 style: GoogleFonts.cairo(
-                  fontSize: 14,
+                  fontSize: isMobile ? 12 : 14,
                   fontWeight: FontWeight.bold,
                   color: colorScheme.primary,
                 ),
