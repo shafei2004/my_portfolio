@@ -13,6 +13,7 @@ import '../widgets/project_about_section.dart';
 import '../widgets/project_features_section.dart';
 import '../widgets/project_technologies_section.dart';
 import '../widgets/github_button.dart';
+import '../widgets/google_play_button.dart';
 
 class ProjectDetailPage extends StatefulWidget {
   final String projectId;
@@ -206,16 +207,32 @@ class _ProjectDetailPageState extends State<ProjectDetailPage> {
             ],
           ),
 
-          // 🏗️ Floating Action Button (GitHub)
-          Positioned(
-            bottom: 30,
-            right: 30,
-            child: FadeInRight(
-              duration: const Duration(milliseconds: 800),
-              delay: const Duration(milliseconds: 1200),
-              child: GithubButton(githubUrl: p.githubUrl),
+          // 🏗️ Floating Action Buttons (Google Play & GitHub)
+          if (p.githubUrl.isNotEmpty || (p.googlePlayUrl != null && p.googlePlayUrl!.trim().isNotEmpty))
+            Positioned(
+              bottom: 24,
+              right: 20,
+              left: 20,
+              child: Align(
+                alignment: Alignment.bottomRight,
+                child: FadeInUp(
+                  duration: const Duration(milliseconds: 800),
+                  delay: const Duration(milliseconds: 1000),
+                  child: Wrap(
+                    alignment: WrapAlignment.end,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    spacing: 12,
+                    runSpacing: 10,
+                    children: [
+                      if (p.googlePlayUrl != null && p.googlePlayUrl!.trim().isNotEmpty)
+                        GooglePlayButton(googlePlayUrl: p.googlePlayUrl!),
+                      if (p.githubUrl.isNotEmpty)
+                        GithubButton(githubUrl: p.githubUrl),
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
         ],
       ),
     );

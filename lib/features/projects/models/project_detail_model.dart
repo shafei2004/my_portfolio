@@ -7,6 +7,7 @@ class ProjectDetailModel {
   final List<String> features;
   final List<String> technologies;
   final String githubUrl;
+  final String? googlePlayUrl;
 
   ProjectDetailModel({
     required this.title,
@@ -17,6 +18,7 @@ class ProjectDetailModel {
     required this.features,
     required this.technologies,
     required this.githubUrl,
+    this.googlePlayUrl,
   });
 
   factory ProjectDetailModel.fromMap(Map<String, dynamic> data) {
@@ -58,6 +60,7 @@ class ProjectDetailModel {
       features: featureList,
       technologies: techList,
       githubUrl: (data['github_url'] ?? data['repo_url'])?.toString() ?? '',
+      googlePlayUrl: (data['googlePlay_url'] ?? data['google_play_url'])?.toString(),
     );
   }
 }

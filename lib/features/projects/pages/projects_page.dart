@@ -28,7 +28,7 @@ class _ProjectsPageState extends State<ProjectsPage> {
     try {
       final res = await supabase
           .from('projects')
-          .select('id, slug, title, short_description, description, cover_url, features, tools, created_at')
+          .select('id, slug, title, short_description, description, cover_url, features, tools, created_at, googlePlay_url')
           .eq('is_published', true)
           .order('created_at', ascending: false)
           .timeout(const Duration(seconds: 10));

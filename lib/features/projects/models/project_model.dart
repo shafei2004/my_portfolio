@@ -6,6 +6,7 @@ class ProjectModel {
   final String image;
   final List<String> features;
   final DateTime? createdAt;
+  final String? googlePlayUrl;
 
   ProjectModel({
     required this.id,
@@ -15,6 +16,7 @@ class ProjectModel {
     required this.image,
     required this.features,
     this.createdAt,
+    this.googlePlayUrl,
   });
 
   factory ProjectModel.fromMap(Map<String, dynamic> map) {
@@ -40,6 +42,7 @@ class ProjectModel {
       image: map['cover_url']?.toString() ?? '',
       features: combinedFeatures,
       createdAt: map['created_at'] != null ? DateTime.tryParse(map['created_at'].toString()) : null,
+      googlePlayUrl: (map['googlePlay_url'] ?? map['google_play_url'])?.toString(),
     );
   }
 }

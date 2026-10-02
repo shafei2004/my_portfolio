@@ -9,8 +9,10 @@ class GithubButton extends StatelessWidget {
     if (url.trim().isEmpty) return;
     Uri uri = Uri.parse(url.startsWith("http") ? url : "https://$url");
     if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
-      ScaffoldMessenger.of(context)
-          .showSnackBar(const SnackBar(content: Text("Could not open URL.")));
+      if (context.mounted) {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(const SnackBar(content: Text("Could not open URL.")));
+      }
     }
   }
 
